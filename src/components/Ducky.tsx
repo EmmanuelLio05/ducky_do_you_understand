@@ -12,9 +12,9 @@ export function Ducky({ mood }: { mood: DuckyMood }) {
 }
 
 export enum DuckyMood {
-    Expectanting = 'rubber_duck_1.jpg',
-    Watching = 'rubber_duck_2.jpg',
-    Thinking = 'rubber_duck_3.jpg',
-    Pondering = 'rubber_duck_4.jpg',
-    Confused = 'rubber_duck_5.jpg'
+    Expectanting = 'Expectanting.PNG',
+    Watching = 'Watching.PNG',
+    Thinking = 'Thinking.PNG',
+    Pondering = 'Pondering.PNG',
+    Confused = 'Confused.PNG'
 }
