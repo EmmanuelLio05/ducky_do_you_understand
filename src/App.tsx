@@ -12,20 +12,15 @@ function App() {
     //#region Efectos
     useEffect(
         () => {
-            async function ducky_think() {
-                setMood(DuckyMood.Watching);
-                await delay(1250);
-                if (explanation.trim().length > 0 && explanation.trim().length <= 50) {
-                    setMood(DuckyMood.Thinking);
-                } else if (explanation.trim().length > 50 && explanation.trim().length <= 150) {
-                    setMood(DuckyMood.Pondering);
-                } else if (explanation.trim().length > 150 && explanation.trim().length <= 300) {
-                    setMood(DuckyMood.Confused);
-                } else if (explanation.trim().length == 0) {
-                    setMood(DuckyMood.Expectanting);
-                }
-            }
-            ducky_think();
+          if (explanation.trim().length > 0 && explanation.trim().length <= 50) {
+            setMood(DuckyMood.Thinking);
+        } else if (explanation.trim().length > 50 && explanation.trim().length <= 150) {
+            setMood(DuckyMood.Pondering);
+        } else if (explanation.trim().length > 150 && explanation.trim().length <= 300) {
+            setMood(DuckyMood.Confused);
+        } else if (explanation.trim().length == 0) {
+            setMood(DuckyMood.Expectanting);
+        }
             return;
         },
         [explanation]
@@ -58,9 +53,5 @@ function App() {
     </div>
     //#endregion
 }
-
-const delay = (ms: number) => new Promise(
-    resolve => setTimeout(resolve, ms)
-);
 
 export default App
