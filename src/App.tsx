@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { TextField, Typography } from '@mui/material'
 
 import './App.css'
 import { Ducky, DuckyMood } from './components/Ducky'
-import { TellMe } from './components/TellMe'
-import { Title } from './components/Title'
 
 function App() {
     const [explanation, setExplanation] = useState('');
@@ -32,14 +31,23 @@ function App() {
         <div style={{
             height: '20vh'
         }}>
-            <Title />
+            <Typography variant='h3'>Ducky, do you understand?</Typography>
         </div>
         <div style={{
             height: '35vh'
         }}>
-            <TellMe
-                value={explanation}
-                setValue={setExplanation}
+            <TextField
+                value ={explanation}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>)=>{
+                        setExplanation(event.target.value);
+                    }
+                }
+                label="Tell me"
+                color='info'
+                maxRows={6}
+                minRows={4}
+                fullWidth 
+                multiline
             />
         </div>
         <div style={{
