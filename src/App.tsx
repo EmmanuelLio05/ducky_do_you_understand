@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { Textarea, Title } from '@mantine/core'
 
 import './App.css'
 import { Ducky, DuckyMood } from './components/Ducky'
-import { TellMe } from './components/TellMe'
-import { Title } from './components/Title'
 
 function App() {
     const [explanation, setExplanation] = useState('');
@@ -12,19 +11,26 @@ function App() {
     //#region Efectos
     useEffect(
         () => {
-          if (explanation.trim().length > 0 && explanation.trim().length <= 50) {
-            setMood(DuckyMood.Thinking);
-        } else if (explanation.trim().length > 50 && explanation.trim().length <= 150) {
-            setMood(DuckyMood.Pondering);
-        } else if (explanation.trim().length > 150 && explanation.trim().length <= 300) {
-            setMood(DuckyMood.Confused);
-        } else if (explanation.trim().length == 0) {
-            setMood(DuckyMood.Expectanting);
-        }
+            async function ducky_think() {
+                setMood(DuckyMood.Watching);
+                await delay(500);
+                if (explanation.trim().length > 0 && explanation.trim().length <= 50) {
+                    setMood(DuckyMood.Thinking);
+                } else if (explanation.trim().length > 50 && explanation.trim().length <= 150) {
+                    setMood(DuckyMood.Pondering);
+                } else if (explanation.trim().length > 150 ) {
+                    setMood(DuckyMood.Confused);
+                } else if (explanation.trim().length == 0) {
+                    setMood(DuckyMood.Expectanting);
+                }
+            }
+            ducky_think();
             return;
         },
         [explanation]
-    );
+    );
+
+
     //#endregion
 
     //#region Return
@@ -32,14 +38,18 @@ function App() {
         <div style={{
             height: '20vh'
         }}>
-            <Title />
+            <Title order={3}>Ducky, do you understand?</Title>
         </div>
         <div style={{
             height: '35vh'
         }}>
-            <TellMe
+            <Textarea
                 value={explanation}
-                setValue={setExplanation}
+                onChange={(event) => setExplanation(event.currentTarget.value)}
+                label="Tell me"
+                autosize
+                minRows={4}
+                maxRows={6}
             />
         </div>
         <div style={{
@@ -53,5 +63,9 @@ function App() {
     </div>
     //#endregion
 }
+
+const delay = (ms: number) => new Promise(
+    resolve => setTimeout(resolve, ms)
+);
 
 export default App
